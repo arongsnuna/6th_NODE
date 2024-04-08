@@ -4,9 +4,10 @@ import express from 'express'; // ES6
 import dotenv from 'dotenv';
 import { testRouter } from './srcs/routes/testRoute';
 import { response } from './config/response.js';
+import { swaggerUi, specs } from './swagger/swagger';
 
-const app = express();
 dotenv.config
+const app = express();
 const port = 3000
 
 // // myLogger가 하나의 미들웨어
@@ -19,6 +20,11 @@ const port = 3000
 
 app.use('/',testRouter);
 
+app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(specs, { explorer: true })
+);
 
 
 app.use((err, req, res, next) => {
@@ -28,6 +34,7 @@ app.use((err, req, res, next) => {
     res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
     res.status(err.data.status).send(response(err.data));
 });
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
