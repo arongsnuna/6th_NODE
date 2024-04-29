@@ -3,6 +3,7 @@
 import express from 'express'; // ES6
 import dotenv from 'dotenv';
 import { testRouter } from './srcs/routes/testRoute';
+import {memberRouter} from './srcs/routes/memberRoute';
 import { response } from './config/response.js';
 import { swaggerUi, specs } from './swagger/swagger';
 
@@ -10,15 +11,9 @@ dotenv.config
 const app = express();
 const port = 3000
 
-// // myLogger가 하나의 미들웨어
-// const myLogger = (req, res, next) => {
-//     console.log("LOGGED");
-//     next();
-//     // next()를 해줘야지 다음 미들웨어로 감
-// }
-
-
 app.use('/',testRouter);
+
+app.use('/api/members', memberRouter);
 
 app.use(
     "/api-docs",
