@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const pool = mysql.createPool({
-    host: process.env.DB_HOST,  // mysql의 hostname
+    host: '127.0.0.1',  // mysql의 hostname
     user: process.env.DB_USER,  // user 이름
     port: process.env.DB_PORT,  // 포트 번호
     database: process.env.DB_TABLE,  // 데이터베이스 이름

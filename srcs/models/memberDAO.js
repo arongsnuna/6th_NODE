@@ -1,26 +1,24 @@
-import { pool } from '../../config/db';
+import { pool } from '../../config/db.js';
 import { BaseError } from '../../config/error';
 import { errStatus } from '../../config/errStatus';
-import { insertUserSql,  getUserID, confirmEmail} from './memberSQL';
+import { insertUserSql,  getUserID, confirmEmail } from './memberSQL';
 
 
 // User 데이터 삽입
 export const addUser = async (data) => {
     try{
         const conn = await pool.getConnection();
+        console.log(2);
 
         const [confirm] = await pool.query(confirmEmail, data.email);
-
         if(confirm[0].isExistEmail){
             conn.release();
             return -1;
         }
-
-        const result = await pool.query(insertUserSql, [data.email, data.name, data.gender, data.birth, data.addr, data.specAddr, data.phone]);
+        const result = await pool.query(insertUserSql, [data.email, data.name, data.gender, data.phone, data.address, data.specAddr, data.birth]);
 
         conn.release();
         return result[0].insertId;
-
     }catch (err) {
         throw new BaseError(errStatus.PARAMETER_IS_WRONG);
     }
