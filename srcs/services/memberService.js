@@ -22,3 +22,10 @@ export const join = async (body) => {
         return signinResponseDTO(await getUser(joinUserData));
     }
 }
+
+export const login = async (body) =>{
+    const loginStatus = await findUser({
+        'email': body.email,
+        'name': body.name
+    })
+}

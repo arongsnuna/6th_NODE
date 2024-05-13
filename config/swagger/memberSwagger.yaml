@@ -70,7 +70,6 @@ paths:
                   "email": "swaggerTest@mail.com",
                   "name": "swagger",
                 }
-                
         '400':
           description: 잘못된 요청
           schema:

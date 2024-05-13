@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import { testRouter } from './srcs/routes/testRoute';
 import { memberRouter } from './srcs/routes/memberRoute';
 import { response } from './config/response.js';
-import { swaggerUi, specs } from './swagger/swagger';
+import { swaggerUi, specs } from './config/swagger.js';
 import cors from "cors";
 
 dotenv.config
